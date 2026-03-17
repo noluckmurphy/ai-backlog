@@ -2,7 +2,7 @@ export type FeedbackSource = 'support' | 'sales' | 'nps';
 export type SentimentLabel = 'very_negative' | 'negative' | 'neutral' | 'positive' | 'very_positive';
 export type ImpactType = 'churn_risk' | 'expansion_opportunity' | 'support_cost' | 'time_saved';
 export type WorkItemStatus = 'suggested' | 'accepted' | 'rejected' | 'deferred';
-export type ActiveView = 'feedback' | 'sentiment' | 'backlog' | 'rules' | 'sources';
+export type ActiveView = 'feedback' | 'sentiment' | 'backlog' | 'rules' | 'sources' | 'scanning';
 
 export interface FeedbackItem {
   id: string;

@@ -1,12 +1,34 @@
-import { MessageSquare, TrendingDown, ListChecks, Sliders, Database } from 'lucide-react';
+import { MessageSquare, TrendingDown, ListChecks, Sliders, Database, Scan } from 'lucide-react';
 import { ActiveView } from '../../types';
 
-const navItems: { view: ActiveView; label: string; icon: typeof MessageSquare }[] = [
-  { view: 'feedback', label: 'Feedback Feed', icon: MessageSquare },
-  { view: 'sentiment', label: 'Sentiment', icon: TrendingDown },
-  { view: 'backlog', label: 'Suggested Items', icon: ListChecks },
-  { view: 'rules', label: 'Value Rules', icon: Sliders },
-  { view: 'sources', label: 'Data Sources', icon: Database },
+interface NavItem {
+  view: ActiveView;
+  label: string;
+  icon: typeof MessageSquare;
+}
+
+interface NavGroup {
+  header: string;
+  items: NavItem[];
+}
+
+const navGroups: NavGroup[] = [
+  {
+    header: 'Sentiment Loop',
+    items: [
+      { view: 'feedback', label: 'Feedback Feed', icon: MessageSquare },
+      { view: 'sentiment', label: 'Sentiment Trends', icon: TrendingDown },
+      { view: 'backlog', label: 'Suggested Items', icon: ListChecks },
+      { view: 'rules', label: 'Value Rules', icon: Sliders },
+      { view: 'sources', label: 'Data Sources', icon: Database },
+    ],
+  },
+  {
+    header: 'Cross-Team',
+    items: [
+      { view: 'scanning', label: 'Scanning Dashboard', icon: Scan },
+    ],
+  },
 ];
 
 interface SidebarProps {
@@ -24,19 +46,30 @@ export default function Sidebar({ activeView, onViewChange }: SidebarProps) {
         </span>
       </div>
       <nav className="flex-1 py-2">
-        {navItems.map(({ view, label, icon: Icon }) => (
-          <button
-            key={view}
-            onClick={() => onViewChange(view)}
-            className={`w-full flex items-center gap-2 px-4 py-2.5 text-xs text-left transition-colors ${
-              activeView === view
-                ? 'bg-gray-900 text-gray-50'
-                : 'text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <Icon size={14} />
-            {label}
-          </button>
+        {navGroups.map((group, groupIdx) => (
+          <div key={group.header}>
+            <div
+              className={`px-4 py-1.5 text-[10px] font-bold uppercase text-gray-500 tracking-wide ${
+                groupIdx > 0 ? 'border-t border-gray-400 mt-2 pt-2' : ''
+              }`}
+            >
+              {group.header}
+            </div>
+            {group.items.map(({ view, label, icon: Icon }) => (
+              <button
+                key={view}
+                onClick={() => onViewChange(view)}
+                className={`w-full flex items-center gap-2 px-4 py-2.5 text-xs text-left transition-colors ${
+                  activeView === view
+                    ? 'bg-gray-900 text-gray-50'
+                    : 'text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                <Icon size={14} />
+                {label}
+              </button>
+            ))}
+          </div>
         ))}
       </nav>
       <div className="px-4 py-3 border-t border-gray-400 text-[10px] text-gray-500">
