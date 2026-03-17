@@ -6,6 +6,8 @@ import SentimentDashboard from './components/sentiment/SentimentDashboard';
 import SuggestedItemsList from './components/backlog/SuggestedItemsList';
 import RulesList from './components/rules/RulesList';
 import SourcesList from './components/sources/SourcesList';
+import ScanningDashboard from './components/scanning/ScanningDashboard';
+import EnrichmentDashboard from './components/enrichment/EnrichmentDashboard';
 
 function App() {
   const [activeView, setActiveView] = useState<ActiveView>('feedback');
@@ -17,6 +19,8 @@ function App() {
       case 'backlog': return <SuggestedItemsList />;
       case 'rules': return <RulesList />;
       case 'sources': return <SourcesList />;
+      case 'scanning': return <ScanningDashboard />;
+      case 'enrichment': return <EnrichmentDashboard />;
     }
   };
 

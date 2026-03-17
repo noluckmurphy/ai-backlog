@@ -1,36 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { suggestedWorkItems } from '../../data/suggestedWorkItems';
 import { SuggestedWorkItem, WorkItemStatus } from '../../types';
 import SuggestedItemCard from './SuggestedItemCard';
 import PageHeader from '../layout/PageHeader';
 import { formatCurrency } from '../../utils/formatters';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 type SortKey = 'value' | 'confidence' | 'priority' | 'feedback';
-
-const STORAGE_KEY = 'ai-backlog-item-statuses';
-
-function loadStatuses(): Record<string, WorkItemStatus> {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
-}
-
-function saveStatuses(statuses: Record<string, WorkItemStatus>) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(statuses));
-}
 
 const priorityOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 };
 
 export default function SuggestedItemsList() {
-  const [statuses, setStatuses] = useState<Record<string, WorkItemStatus>>(loadStatuses);
+  const [statuses, setStatuses] = useLocalStorage<Record<string, WorkItemStatus>>('ai-backlog-item-statuses', {});
   const [sortBy, setSortBy] = useState<SortKey>('value');
-
-  useEffect(() => {
-    saveStatuses(statuses);
-  }, [statuses]);
 
   const items: SuggestedWorkItem[] = suggestedWorkItems.map((item) => ({
     ...item,
@@ -67,7 +49,7 @@ export default function SuggestedItemsList() {
           <button
             key={key}
             onClick={() => setSortBy(key)}
-            className={`text-[10px] px-2 py-1 border ${
+            className={`text-[10px] px-2 py-1 border transition-colors ${
               sortBy === key
                 ? 'bg-gray-900 text-gray-50 border-gray-900'
                 : 'border-gray-400 hover:bg-gray-200'
@@ -77,7 +59,7 @@ export default function SuggestedItemsList() {
           </button>
         ))}
       </div>
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {sorted.map((item) => (
           <SuggestedItemCard
             key={item.id}

@@ -2,7 +2,7 @@ export type FeedbackSource = 'support' | 'sales' | 'nps';
 export type SentimentLabel = 'very_negative' | 'negative' | 'neutral' | 'positive' | 'very_positive';
 export type ImpactType = 'churn_risk' | 'expansion_opportunity' | 'support_cost' | 'time_saved';
 export type WorkItemStatus = 'suggested' | 'accepted' | 'rejected' | 'deferred';
-export type ActiveView = 'feedback' | 'sentiment' | 'backlog' | 'rules' | 'sources';
+export type ActiveView = 'feedback' | 'sentiment' | 'backlog' | 'rules' | 'sources' | 'scanning' | 'enrichment';
 
 export interface FeedbackItem {
   id: string;
@@ -93,4 +93,74 @@ export interface DataSource {
   lastSyncAt: string;
   itemCount: number;
   description: string;
+}
+
+// --- Pillar 2: Cross-Team Scanning ---
+
+export type TeamId = 'platform' | 'growth' | 'payments' | 'mobile';
+
+export interface TeamBacklogItem {
+  id: string;
+  teamId: TeamId;
+  title: string;
+  description: string;
+  status: 'planned' | 'in_progress' | 'done';
+  category: string;
+  filesLikelyTouched: string[];
+  createdAt: string;
+}
+
+export interface OverlapItem {
+  id: string;
+  itemA: { teamId: TeamId; itemId: string; title: string };
+  itemB: { teamId: TeamId; itemId: string; title: string };
+  overlapType: 'duplicate' | 'related' | 'conflicting';
+  similarity: number;
+  explanation: string;
+  suggestedAction: 'merge' | 'coordinate' | 'review';
+}
+
+export interface TeamDependency {
+  id: string;
+  fromTeam: TeamId;
+  fromItemId: string;
+  toTeam: TeamId;
+  toItemId: string;
+  dependencyType: 'blocks' | 'needs_api' | 'shared_schema' | 'shared_component';
+  description: string;
+  risk: 'high' | 'medium' | 'low';
+}
+
+// --- Pillar 3: Codebase Enrichment ---
+
+export interface UserStory {
+  id: string;
+  title: string;
+  description: string;
+  acceptanceCriteria: string[];
+  category: string;
+}
+
+export interface TaskBreakdown {
+  id: string;
+  storyId: string;
+  tasks: GeneratedTask[];
+  edgeCases: string[];
+  aiConfidence: number;
+}
+
+export interface GeneratedTask {
+  id: string;
+  title: string;
+  description: string;
+  type: 'frontend' | 'backend' | 'database' | 'testing' | 'devops';
+  estimatedHours: number;
+  codeContext: CodeContext[];
+}
+
+export interface CodeContext {
+  filePath: string;
+  lineRange: string;
+  relevance: string;
+  snippet: string;
 }

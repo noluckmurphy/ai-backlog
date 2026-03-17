@@ -4,6 +4,7 @@ import { feedbackItems } from '../../data/feedbackItems';
 import SentimentChart from './SentimentChart';
 import CategoryBreakdownTable from './CategoryBreakdownTable';
 import PageHeader from '../layout/PageHeader';
+import MetricCard from '../shared/MetricCard';
 
 export default function SentimentDashboard() {
   const totalFeedback = feedbackItems.length;
@@ -35,10 +36,7 @@ export default function SentimentDashboard() {
             { label: 'NPS Score', value: String(npsScore) },
             { label: 'Trend', value: '\u2193 Declining' },
           ].map((m) => (
-            <div key={m.label} className="border border-gray-400 px-4 py-3">
-              <div className="text-[10px] text-gray-500 uppercase">{m.label}</div>
-              <div className="text-lg font-bold mt-0.5">{m.value}</div>
-            </div>
+            <MetricCard key={m.label} label={m.label} value={m.value} />
           ))}
         </div>
 
