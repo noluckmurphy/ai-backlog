@@ -1,7 +1,17 @@
-import { SentimentDataPoint } from '../types';
+import { SentimentDataPoint, WeeklyVolume } from '../types';
 
 // 26 weeks of data (Jul 2025 - Dec 2025)
 // Narrative: billing sentiment craters, onboarding declines, API frustration builds
+
+function seededRandom(seed: number): () => number {
+  let s = seed;
+  return () => {
+    s = (s * 16807) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+const rand = seededRandom(99);
 
 function weekDate(weekNum: number): string {
   const d = new Date(2025, 6, 7); // Mon Jul 7, 2025
@@ -27,7 +37,7 @@ function generateSourceTrend(
     source,
     category: 'all',
     avgSentiment: lerp(startSentiment, endSentiment, i / 25) + (noise[i] || 0),
-    volume: Math.floor(8 + Math.random() * 12),
+    volume: Math.floor(8 + rand() * 12),
   }));
 }
 
@@ -69,14 +79,6 @@ export const sentimentTimeSeries: SentimentDataPoint[] = [
 ];
 
 // Aggregated weekly volume for the volume bar chart
-export interface WeeklyVolume {
-  weekOf: string;
-  support: number;
-  sales: number;
-  nps: number;
-  total: number;
-}
-
 export const weeklyVolumes: WeeklyVolume[] = weeks.map((w) => {
   const support = Math.floor(6 + Math.sin(w * 0.5) * 3 + w * 0.3);
   const sales = Math.floor(3 + Math.cos(w * 0.7) * 2 + w * 0.15);

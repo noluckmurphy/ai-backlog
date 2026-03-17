@@ -23,7 +23,7 @@ export default function SentimentChart() {
       <h3 className="text-xs font-bold uppercase mb-3">Sentiment Over Time (26 weeks)</h3>
       <ResponsiveContainer width="100%" height={240}>
         <LineChart data={chartData}>
-          <CartesianGrid stroke="#d1d5db" strokeDasharray="3 3" />
+          <CartesianGrid stroke="#d1d5db" />
           <XAxis
             dataKey="week"
             tick={{ fontSize: 10, fontFamily: 'monospace' }}
@@ -50,7 +50,6 @@ export default function SentimentChart() {
             dataKey="sales"
             stroke="#6b7280"
             strokeWidth={1.5}
-            strokeDasharray="6 3"
             dot={false}
             isAnimationActive={false}
           />
@@ -59,7 +58,6 @@ export default function SentimentChart() {
             dataKey="nps"
             stroke="#9ca3af"
             strokeWidth={1.5}
-            strokeDasharray="2 2"
             dot={false}
             isAnimationActive={false}
           />

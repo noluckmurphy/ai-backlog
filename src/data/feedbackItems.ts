@@ -1,4 +1,5 @@
 import { FeedbackItem } from '../types';
+import { sentimentToLabel } from '../utils/sentimentHelpers';
 
 // 20 hand-written narrative items + ~60 template-generated items
 const handWritten: FeedbackItem[] = [
@@ -302,14 +303,6 @@ function seededRandom(seed: number): () => number {
   };
 }
 
-function sentimentLabel(score: number) {
-  if (score <= -0.6) return 'very_negative' as const;
-  if (score <= -0.2) return 'negative' as const;
-  if (score <= 0.2) return 'neutral' as const;
-  if (score <= 0.6) return 'positive' as const;
-  return 'very_positive' as const;
-}
-
 function generateTemplateItems(): FeedbackItem[] {
   const rand = seededRandom(42);
   const items: FeedbackItem[] = [];
@@ -334,7 +327,7 @@ function generateTemplateItems(): FeedbackItem[] {
       customerSegment: seg,
       rawText: tpl.text,
       sentimentScore: Math.round(score * 100) / 100,
-      sentimentLabel: sentimentLabel(score),
+      sentimentLabel: sentimentToLabel(score),
       categories: tpl.categories,
     };
 

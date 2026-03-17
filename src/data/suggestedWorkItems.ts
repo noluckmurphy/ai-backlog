@@ -24,7 +24,7 @@ export const suggestedWorkItems: SuggestedWorkItem[] = [
   {
     id: 'wi-002',
     title: 'Build REST API for Integrations',
-    description: 'Design and ship a public REST API with OAuth2 authentication, covering core CRUD operations, data export, and webhook subscriptions. Four enterprise deals ($540K total ARR) were lost in the past quarter specifically because competitors offered API access.',
+    description: 'Design and ship a public REST API with OAuth2 authentication, covering core CRUD operations, data export, and webhook subscriptions. Three enterprise deals ($450K total ARR) were lost in the past quarter specifically because competitors offered API access, and one current customer ($90K ARR) is threatening non-renewal.',
     status: 'suggested',
     aiConfidence: 0.78,
     estimatedValue: 162000,
@@ -35,7 +35,7 @@ export const suggestedWorkItems: SuggestedWorkItem[] = [
     ],
     size: 'XL',
     category: 'integrations',
-    sentimentDriver: '4 lost enterprise deals totaling $540K cited lack of API. 1 current customer ($90K ARR) threatening non-renewal. Sales sentiment on integrations dropped to -0.5.',
+    sentimentDriver: '3 lost enterprise deals totaling $450K cited lack of API. 1 current customer ($90K ARR) threatening non-renewal. Sales sentiment on integrations dropped to -0.5.',
     linkedFeedbackIds: ['fb-011', 'fb-012', 'fb-013', 'fb-014', 'fb-015', 'fb-t006'],
     suggestedPriority: 'critical',
     createdAt: '2025-12-23T08:00:00Z',

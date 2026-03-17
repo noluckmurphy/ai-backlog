@@ -77,6 +77,14 @@ export interface SuggestedWorkItem {
   createdAt: string;
 }
 
+export interface WeeklyVolume {
+  weekOf: string;
+  support: number;
+  sales: number;
+  nps: number;
+  total: number;
+}
+
 export interface DataSource {
   id: string;
   name: string;

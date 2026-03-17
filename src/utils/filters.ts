@@ -6,6 +6,8 @@ export interface FeedbackFilterState {
   category: string;
   segment: 'enterprise' | 'mid-market' | 'smb' | 'all';
   search: string;
+  dateFrom: string;
+  dateTo: string;
 }
 
 export const defaultFilters: FeedbackFilterState = {
@@ -14,6 +16,8 @@ export const defaultFilters: FeedbackFilterState = {
   category: 'all',
   segment: 'all',
   search: '',
+  dateFrom: '',
+  dateTo: '',
 };
 
 export function filterFeedback(
@@ -31,6 +35,8 @@ export function filterFeedback(
       !item.customerName.toLowerCase().includes(filters.search.toLowerCase())
     )
       return false;
+    if (filters.dateFrom && item.timestamp < filters.dateFrom) return false;
+    if (filters.dateTo && item.timestamp.slice(0, 10) > filters.dateTo) return false;
     return true;
   });
 }

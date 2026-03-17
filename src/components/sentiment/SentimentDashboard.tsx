@@ -10,8 +10,10 @@ export default function SentimentDashboard() {
   const avgSentiment =
     feedbackItems.reduce((sum, f) => sum + f.sentimentScore, 0) / totalFeedback;
   const npsItems = feedbackItems.filter((f) => f.npsScore !== undefined);
-  const avgNps = npsItems.length
-    ? npsItems.reduce((sum, f) => sum + (f.npsScore ?? 0), 0) / npsItems.length
+  const promoters = npsItems.filter((f) => (f.npsScore ?? 0) >= 9).length;
+  const detractors = npsItems.filter((f) => (f.npsScore ?? 0) <= 6).length;
+  const npsScore = npsItems.length
+    ? Math.round(((promoters - detractors) / npsItems.length) * 100)
     : 0;
 
   const volumeChartData = weeklyVolumes.map((w) => ({
@@ -30,7 +32,7 @@ export default function SentimentDashboard() {
           {[
             { label: 'Total Feedback', value: String(totalFeedback) },
             { label: 'Avg Sentiment', value: avgSentiment >= 0 ? `+${avgSentiment.toFixed(2)}` : avgSentiment.toFixed(2) },
-            { label: 'Avg NPS', value: avgNps.toFixed(1) },
+            { label: 'NPS Score', value: String(npsScore) },
             { label: 'Trend', value: '\u2193 Declining' },
           ].map((m) => (
             <div key={m.label} className="border border-gray-400 px-4 py-3">
@@ -48,7 +50,7 @@ export default function SentimentDashboard() {
           <h3 className="text-xs font-bold uppercase mb-3">Feedback Volume Per Week</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={volumeChartData}>
-              <CartesianGrid stroke="#d1d5db" strokeDasharray="3 3" />
+              <CartesianGrid stroke="#d1d5db" />
               <XAxis dataKey="week" tick={{ fontSize: 10, fontFamily: 'monospace' }} interval={3} />
               <YAxis tick={{ fontSize: 10, fontFamily: 'monospace' }} />
               <Legend wrapperStyle={{ fontSize: 10, fontFamily: 'monospace' }} />

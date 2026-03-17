@@ -68,6 +68,22 @@ export default function FeedbackFilters({ filters, onChange, categories, resultC
         <option value="smb">SMB</option>
       </select>
 
+      <input
+        type="date"
+        value={filters.dateFrom}
+        onChange={(e) => update({ dateFrom: e.target.value })}
+        className="px-2 py-1 text-xs border border-gray-400 bg-white"
+        title="From date"
+      />
+      <span className="text-[10px] text-gray-500">&ndash;</span>
+      <input
+        type="date"
+        value={filters.dateTo}
+        onChange={(e) => update({ dateTo: e.target.value })}
+        className="px-2 py-1 text-xs border border-gray-400 bg-white"
+        title="To date"
+      />
+
       <span className="text-[10px] text-gray-500 ml-auto">{resultCount} items</span>
     </div>
   );
