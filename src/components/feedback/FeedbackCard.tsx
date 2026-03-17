@@ -33,9 +33,18 @@ export default function FeedbackCard({ item }: FeedbackCardProps) {
         <span className="text-[10px] text-gray-500 whitespace-nowrap">{formatDate(item.timestamp)}</span>
       </div>
 
-      <p className={`text-xs mt-1.5 text-gray-700 ${expanded ? '' : 'line-clamp-2'}`}>
+      <p className={`text-xs mt-1.5 text-gray-700 ${expanded ? '' : 'line-clamp-1'}`}>
         {item.rawText}
       </p>
+
+      {expanded && (
+        <div className="mt-2 pt-2 border-t border-gray-200 text-[10px] text-gray-500 space-y-1">
+          <div>Source: {item.source} | Segment: {item.customerSegment} | Sentiment: {item.sentimentScore.toFixed(2)}</div>
+          {item.supportTicketPriority && <div>Ticket Priority: {item.supportTicketPriority}</div>}
+          {item.npsScore !== undefined && <div>NPS Score: {item.npsScore}/10</div>}
+          {item.salesDealValue !== undefined && <div>Deal Value: {formatCurrency(item.salesDealValue)}</div>}
+        </div>
+      )}
 
       <div className="flex items-center gap-3 mt-2 flex-wrap">
         <span className="text-[10px] font-mono" title={sentimentLabelDisplay(item.sentimentLabel)}>
