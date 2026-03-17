@@ -19,6 +19,7 @@ export default function FeedbackCard({ item }: FeedbackCardProps) {
   return (
     <button
       onClick={() => setExpanded(!expanded)}
+      aria-expanded={expanded}
       className="w-full text-left px-4 py-3 border-b border-gray-300 hover:bg-gray-100 transition-colors"
     >
       <div className="flex items-start justify-between gap-2">

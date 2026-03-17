@@ -1,4 +1,4 @@
-import { formatCurrency, formatDate, formatPercent, formatSentimentScore } from '../../utils/formatters';
+import { formatCurrency, formatPercent, formatSentimentScore } from '../../utils/formatters';
 
 describe('formatCurrency', () => {
   it('formats millions', () => expect(formatCurrency(1_500_000)).toBe('$1.5M'));

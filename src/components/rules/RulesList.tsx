@@ -48,6 +48,9 @@ export default function RulesList() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => toggleActive(rule.id)}
+                    role="switch"
+                    aria-checked={rule.isActive}
+                    aria-label={`Toggle ${rule.name}`}
                     className={`w-8 h-4 border border-gray-400 relative ${
                       rule.isActive ? 'bg-gray-900' : 'bg-gray-200'
                     }`}

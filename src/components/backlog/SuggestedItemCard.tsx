@@ -55,6 +55,7 @@ export default function SuggestedItemCard({ item, onStatusChange }: SuggestedIte
 
       <button
         onClick={() => setShowBreakdown(!showBreakdown)}
+        aria-expanded={showBreakdown}
         className="text-[10px] underline text-gray-500 hover:text-gray-900 mt-1"
       >
         {showBreakdown ? 'hide' : 'show'} value breakdown
