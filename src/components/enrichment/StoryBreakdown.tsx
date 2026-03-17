@@ -37,9 +37,9 @@ export default function StoryBreakdown({ breakdown, story }: StoryBreakdownProps
       </div>
 
       {/* Task list */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         {breakdown.tasks.map((task) => (
-          <div key={task.id} className="border border-gray-400 p-3">
+          <div key={task.id} className="border border-gray-400 p-4">
             <div className="flex items-center gap-2 mb-1">
               <span
                 className={`inline-block px-1.5 py-0.5 text-[10px] font-bold uppercase ${

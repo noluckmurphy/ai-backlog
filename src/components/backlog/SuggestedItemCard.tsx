@@ -42,7 +42,7 @@ export default function SuggestedItemCard({ item, onStatusChange }: SuggestedIte
           <h3 className="text-sm font-bold mt-1.5">{item.title}</h3>
         </div>
         <div className="text-right shrink-0">
-          <div className="text-base font-bold">{formatCurrency(item.estimatedValue)}<span className="text-[10px] text-gray-500">/yr</span></div>
+          <div className="text-lg font-bold">{formatCurrency(item.estimatedValue)}<span className="text-[10px] text-gray-500">/yr</span></div>
           <div className="text-[10px] text-gray-500">{formatPercent(item.aiConfidence)} confidence</div>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function SuggestedItemCard({ item, onStatusChange }: SuggestedIte
       <button
         onClick={() => setShowBreakdown(!showBreakdown)}
         aria-expanded={showBreakdown}
-        className="text-[10px] underline text-gray-500 hover:text-gray-900 mt-1"
+        className="text-[10px] underline text-gray-500 hover:text-gray-900 mt-1 transition-colors"
       >
         {showBreakdown ? 'hide' : 'show'} value breakdown
       </button>

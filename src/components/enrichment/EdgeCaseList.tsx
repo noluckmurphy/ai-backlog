@@ -20,7 +20,7 @@ export default function EdgeCaseList({ edgeCases }: EdgeCaseListProps) {
   };
 
   return (
-    <div className="border border-gray-400 p-3">
+    <div className="border border-gray-400 p-4">
       <div className="flex items-center justify-between mb-2">
         <h4 className="text-xs font-bold uppercase">Edge Cases (AI-suggested)</h4>
         <span className="text-[10px] text-gray-500">

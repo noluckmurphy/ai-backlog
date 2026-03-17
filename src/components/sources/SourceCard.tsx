@@ -50,7 +50,7 @@ export default function SourceCard({ source, onToggle }: SourceCardProps) {
 
       <button
         onClick={() => onToggle(source.id)}
-        className={`mt-3 px-3 py-1 text-[10px] font-bold uppercase border ${
+        className={`mt-3 px-3 py-1 text-[10px] font-bold uppercase border transition-colors ${
           source.status === 'disconnected'
             ? 'bg-gray-900 text-gray-50 border-gray-900 hover:bg-gray-700'
             : 'border-gray-400 hover:bg-gray-200'

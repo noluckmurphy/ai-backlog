@@ -54,7 +54,7 @@ export default function RuleEditor({ rule, onChange }: RuleEditorProps) {
                 <button
                   key={cat}
                   onClick={() => toggleCategory(cat)}
-                  className={`text-[10px] px-1.5 py-0.5 border ${
+                  className={`text-[10px] px-1.5 py-0.5 border transition-colors ${
                     rule.conditions.categories.includes(cat)
                       ? 'bg-gray-900 text-gray-50 border-gray-900'
                       : 'border-gray-400 hover:bg-gray-200'
@@ -98,7 +98,7 @@ export default function RuleEditor({ rule, onChange }: RuleEditorProps) {
                 <button
                   key={src}
                   onClick={() => toggleSource(src)}
-                  className={`text-[10px] px-1.5 py-0.5 border ${
+                  className={`text-[10px] px-1.5 py-0.5 border transition-colors ${
                     (rule.conditions.sourceFilter || []).includes(src)
                       ? 'bg-gray-900 text-gray-50 border-gray-900'
                       : 'border-gray-400 hover:bg-gray-200'
@@ -117,7 +117,7 @@ export default function RuleEditor({ rule, onChange }: RuleEditorProps) {
                 <button
                   key={seg}
                   onClick={() => toggleSegment(seg)}
-                  className={`text-[10px] px-1.5 py-0.5 border ${
+                  className={`text-[10px] px-1.5 py-0.5 border transition-colors ${
                     (rule.conditions.segmentFilter || []).includes(seg)
                       ? 'bg-gray-900 text-gray-50 border-gray-900'
                       : 'border-gray-400 hover:bg-gray-200'

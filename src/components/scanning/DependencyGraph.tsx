@@ -50,7 +50,7 @@ export default function DependencyGraph({ dependencies }: DependencyGraphProps) 
         </thead>
         <tbody>
           {dependencies.map((dep) => (
-            <tr key={dep.id} className="border-b border-gray-300">
+            <tr key={dep.id} className="border-b border-gray-300 hover:bg-gray-50">
               <td className="px-4 py-3 align-top">
                 <div className="text-[10px] text-gray-500 uppercase">{dep.fromTeam}</div>
                 <div className="text-xs mt-0.5">{lookupTitle(dep.fromItemId)}</div>

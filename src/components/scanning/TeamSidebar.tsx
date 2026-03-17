@@ -27,7 +27,7 @@ export default function TeamSidebar({ selectedTeam, onTeamChange }: TeamSidebarP
   const totalCount = teamBacklogItems.length;
 
   return (
-    <div className="border border-gray-400 p-3">
+    <div className="border border-gray-400 p-4">
       <div className="text-[10px] font-bold uppercase text-gray-500 mb-2">Filter by Team</div>
       <button
         onClick={() => onTeamChange('all')}

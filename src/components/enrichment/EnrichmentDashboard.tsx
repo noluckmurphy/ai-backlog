@@ -42,9 +42,9 @@ export default function EnrichmentDashboard() {
         subtitle="AI-generated task decomposition with codebase context"
       />
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
+      <div className="flex-1 overflow-y-auto p-6 space-y-6">
         {/* Metrics row */}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-4">
           <MetricCard label="Tasks Generated" value={String(metrics.totalTasks)} />
           <MetricCard label="Estimated Hours" value={String(metrics.totalHours)} />
           <MetricCard label="Files Impacted" value={String(metrics.filesImpacted)} />
@@ -52,7 +52,7 @@ export default function EnrichmentDashboard() {
         </div>
 
         {/* Story selector */}
-        <div className="border border-gray-400 p-3">
+        <div className="border border-gray-400 p-4">
           <label className="text-[10px] font-bold uppercase text-gray-500 block mb-1">
             Select User Story
           </label>

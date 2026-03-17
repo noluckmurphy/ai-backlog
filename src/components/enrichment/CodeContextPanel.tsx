@@ -31,7 +31,7 @@ export default function CodeContextPanel({ contexts }: CodeContextPanelProps) {
           <div key={i} className="border border-gray-300">
             <button
               onClick={() => toggle(i)}
-              className="w-full flex items-center gap-1 px-2 py-1 text-[10px] text-left bg-gray-50 hover:bg-gray-200"
+              className="w-full flex items-center gap-1 px-2 py-1 text-[10px] text-left bg-gray-50 hover:bg-gray-200 transition-colors"
             >
               {isExpanded ? <ChevronDown size={10} /> : <ChevronRight size={10} />}
               <span className="font-bold">{ctx.filePath}</span>

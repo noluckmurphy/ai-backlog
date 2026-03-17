@@ -49,7 +49,7 @@ export default function SuggestedItemsList() {
           <button
             key={key}
             onClick={() => setSortBy(key)}
-            className={`text-[10px] px-2 py-1 border ${
+            className={`text-[10px] px-2 py-1 border transition-colors ${
               sortBy === key
                 ? 'bg-gray-900 text-gray-50 border-gray-900'
                 : 'border-gray-400 hover:bg-gray-200'
@@ -59,7 +59,7 @@ export default function SuggestedItemsList() {
           </button>
         ))}
       </div>
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {sorted.map((item) => (
           <SuggestedItemCard
             key={item.id}
