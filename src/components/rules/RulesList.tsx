@@ -1,31 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { defaultValueRules } from '../../data/valueRules';
 import { ValueRule } from '../../types';
 import RuleEditor from './RuleEditor';
 import PageHeader from '../layout/PageHeader';
-
-const STORAGE_KEY = 'ai-backlog-rules';
-
-function loadRules(): ValueRule[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : defaultValueRules;
-  } catch {
-    return defaultValueRules;
-  }
-}
-
-function saveRules(rules: ValueRule[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(rules));
-}
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export default function RulesList() {
-  const [rules, setRules] = useState<ValueRule[]>(loadRules);
+  const [rules, setRules] = useLocalStorage<ValueRule[]>('ai-backlog-rules', defaultValueRules);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-
-  useEffect(() => {
-    saveRules(rules);
-  }, [rules]);
 
   const toggleActive = (id: string) => {
     setRules((prev) =>
