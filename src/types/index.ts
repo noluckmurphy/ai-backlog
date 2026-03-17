@@ -1,0 +1,88 @@
+export type FeedbackSource = 'support' | 'sales' | 'nps';
+export type SentimentLabel = 'very_negative' | 'negative' | 'neutral' | 'positive' | 'very_positive';
+export type ImpactType = 'churn_risk' | 'expansion_opportunity' | 'support_cost' | 'time_saved';
+export type WorkItemStatus = 'suggested' | 'accepted' | 'rejected' | 'deferred';
+export type ActiveView = 'feedback' | 'sentiment' | 'backlog' | 'rules' | 'sources';
+
+export interface FeedbackItem {
+  id: string;
+  source: FeedbackSource;
+  timestamp: string;
+  customerName: string;
+  customerSegment: 'enterprise' | 'mid-market' | 'smb';
+  rawText: string;
+  sentimentScore: number; // -1 to 1
+  sentimentLabel: SentimentLabel;
+  categories: string[];
+  npsScore?: number;
+  supportTicketPriority?: 'low' | 'medium' | 'high' | 'critical';
+  salesDealValue?: number;
+}
+
+export interface SentimentDataPoint {
+  weekOf: string;
+  source: FeedbackSource;
+  category: string;
+  avgSentiment: number;
+  volume: number;
+}
+
+export interface CategoryBreakdown {
+  category: string;
+  totalMentions: number;
+  avgSentiment: number;
+  trend: 'up' | 'down' | 'flat';
+  topKeywords: string[];
+}
+
+export interface ValueRule {
+  id: string;
+  name: string;
+  description: string;
+  isActive: boolean;
+  conditions: {
+    categories: string[];
+    sentimentThreshold: number;
+    minVolumePerWeek: number;
+    sourceFilter?: FeedbackSource[];
+    segmentFilter?: ('enterprise' | 'mid-market' | 'smb')[];
+  };
+  valuation: {
+    impactType: ImpactType;
+    estimatedValuePerIncident: number;
+    formula: string;
+    confidenceLevel: 'high' | 'medium' | 'low';
+  };
+}
+
+export interface ValueBreakdownItem {
+  ruleName: string;
+  impactType: ImpactType;
+  amount: number;
+}
+
+export interface SuggestedWorkItem {
+  id: string;
+  title: string;
+  description: string;
+  status: WorkItemStatus;
+  aiConfidence: number;
+  estimatedValue: number;
+  estimatedValueBreakdown: ValueBreakdownItem[];
+  size: 'XS' | 'S' | 'M' | 'L' | 'XL';
+  category: string;
+  sentimentDriver: string;
+  linkedFeedbackIds: string[];
+  suggestedPriority: 'critical' | 'high' | 'medium' | 'low';
+  createdAt: string;
+}
+
+export interface DataSource {
+  id: string;
+  name: string;
+  type: FeedbackSource;
+  status: 'connected' | 'syncing' | 'error' | 'disconnected';
+  lastSyncAt: string;
+  itemCount: number;
+  description: string;
+}
