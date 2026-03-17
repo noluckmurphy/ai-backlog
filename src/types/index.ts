@@ -130,3 +130,37 @@ export interface TeamDependency {
   description: string;
   risk: 'high' | 'medium' | 'low';
 }
+
+// --- Pillar 3: Codebase Enrichment ---
+
+export interface UserStory {
+  id: string;
+  title: string;
+  description: string;
+  acceptanceCriteria: string[];
+  category: string;
+}
+
+export interface TaskBreakdown {
+  id: string;
+  storyId: string;
+  tasks: GeneratedTask[];
+  edgeCases: string[];
+  aiConfidence: number;
+}
+
+export interface GeneratedTask {
+  id: string;
+  title: string;
+  description: string;
+  type: 'frontend' | 'backend' | 'database' | 'testing' | 'devops';
+  estimatedHours: number;
+  codeContext: CodeContext[];
+}
+
+export interface CodeContext {
+  filePath: string;
+  lineRange: string;
+  relevance: string;
+  snippet: string;
+}
