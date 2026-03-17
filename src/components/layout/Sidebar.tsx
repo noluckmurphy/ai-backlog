@@ -1,4 +1,4 @@
-import { MessageSquare, TrendingDown, ListChecks, Sliders, Database, Scan } from 'lucide-react';
+import { MessageSquare, TrendingDown, ListChecks, Sliders, Database, Scan, Wrench } from 'lucide-react';
 import { ActiveView } from '../../types';
 
 interface NavItem {
@@ -27,6 +27,12 @@ const navGroups: NavGroup[] = [
     header: 'Cross-Team',
     items: [
       { view: 'scanning', label: 'Scanning Dashboard', icon: Scan },
+    ],
+  },
+  {
+    header: 'Enrichment',
+    items: [
+      { view: 'enrichment', label: 'Work Breakdown', icon: Wrench },
     ],
   },
 ];
