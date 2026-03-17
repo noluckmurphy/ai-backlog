@@ -94,3 +94,39 @@ export interface DataSource {
   itemCount: number;
   description: string;
 }
+
+// --- Pillar 2: Cross-Team Scanning ---
+
+export type TeamId = 'platform' | 'growth' | 'payments' | 'mobile';
+
+export interface TeamBacklogItem {
+  id: string;
+  teamId: TeamId;
+  title: string;
+  description: string;
+  status: 'planned' | 'in_progress' | 'done';
+  category: string;
+  filesLikelyTouched: string[];
+  createdAt: string;
+}
+
+export interface OverlapItem {
+  id: string;
+  itemA: { teamId: TeamId; itemId: string; title: string };
+  itemB: { teamId: TeamId; itemId: string; title: string };
+  overlapType: 'duplicate' | 'related' | 'conflicting';
+  similarity: number;
+  explanation: string;
+  suggestedAction: 'merge' | 'coordinate' | 'review';
+}
+
+export interface TeamDependency {
+  id: string;
+  fromTeam: TeamId;
+  fromItemId: string;
+  toTeam: TeamId;
+  toItemId: string;
+  dependencyType: 'blocks' | 'needs_api' | 'shared_schema' | 'shared_component';
+  description: string;
+  risk: 'high' | 'medium' | 'low';
+}
